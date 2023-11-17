@@ -4,7 +4,19 @@ import 'package:flutter/material.dart';
 
 class WorkOutData with ChangeNotifier {
 // initialise empty
-  List<Workout> workoutList = [];
+  List<Workout> workoutList = [
+    Workout(
+      name: 'Upper Body Workout',
+      exercises: [
+        Exercise(
+          name: 'Bicep Curls',
+          weight: '10',
+          reps: '15',
+          sets: '3',
+        ),
+      ],
+    ),
+  ];
 
 //get the list of workouts
   List<Workout> getWorkOutList() {
@@ -35,7 +47,7 @@ class WorkOutData with ChangeNotifier {
     Workout relevantWorkout = getRelevantWorkout(workoutName);
     relevantWorkout.exercises.add(
       Exercise(
-        name: workoutName,
+        name: exerciseName,
         weight: weight,
         reps: reps,
         sets: sets,

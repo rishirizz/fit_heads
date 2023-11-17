@@ -2,9 +2,13 @@ import 'package:fit_heads/pages/home_page.dart';
 import 'package:fit_heads/pages/workout_details_page.dart';
 import 'package:fit_heads/state_management/workout_data.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('workout_db');
   runApp(const MyApp());
 }
 

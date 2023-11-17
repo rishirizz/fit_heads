@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ExerciseTile extends StatefulWidget {
+class ExerciseTile extends StatelessWidget {
   final String name;
   final String weight;
   final String reps;
   final String sets;
   final bool isCompleted;
+  final void Function(bool?)? onCheckChanged;
 
   const ExerciseTile({
     super.key,
@@ -13,41 +14,42 @@ class ExerciseTile extends StatefulWidget {
     required this.weight,
     required this.reps,
     required this.sets,
-    this.isCompleted = false,
+    required this.isCompleted,
+    required this.onCheckChanged,
   });
 
-  @override
-  State<ExerciseTile> createState() => _ExerciseTileState();
-}
-
-class _ExerciseTileState extends State<ExerciseTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        widget.name,
+        name,
       ),
       subtitle: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           //Weight
           Chip(
             label: Text(
-              '${widget.weight}kg',
+              '$weight kg',
             ),
           ),
           //Reps
           Chip(
             label: Text(
-              '${widget.sets}reps',
+              '$reps reps',
             ),
           ),
           //Sets
           Chip(
             label: Text(
-              '${widget.sets}sets',
+              '$sets sets',
             ),
           ),
         ],
+      ),
+      trailing: Checkbox(
+        value: isCompleted,
+        onChanged: (value) => onCheckChanged!(value),
       ),
     );
   }
