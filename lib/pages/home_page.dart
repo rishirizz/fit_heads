@@ -1,3 +1,4 @@
+import 'package:fit_heads/pages/workout_details_page.dart';
 import 'package:fit_heads/state_management/workout_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,18 @@ class _MyHomePageState extends State<MyHomePage> {
             itemBuilder: (BuildContext context, int index) => ListTile(
               title: Text(
                 workOutData.workoutList[index].name.toString(),
+              ),
+              trailing: IconButton(
+                icon: const Icon(
+                  Icons.arrow_forward_ios,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    WorkoutDetailsPage.routeName,
+                    arguments: workOutData.workoutList[index].name,
+                  );
+                },
               ),
             ),
           ),

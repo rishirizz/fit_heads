@@ -11,6 +11,12 @@ class WorkOutData with ChangeNotifier {
     return workoutList;
   }
 
+  //get no of exercises for a given workout
+  getNumberOfExercisesInWorkout(String workoutName) {
+    Workout relevantWorkOut = getRelevantWorkout(workoutName);
+    return relevantWorkOut.exercises.length;
+  }
+
 //add a workout
   addWorkout(String name) {
     workoutList.add(
@@ -26,8 +32,7 @@ class WorkOutData with ChangeNotifier {
   addExerciseToWorkout(String workoutName, String exerciseName, String weight,
       String reps, String sets) {
     //check if the workout is same
-    Workout relevantWorkout =
-        workoutList.firstWhere((workout) => workout.name == workoutName);
+    Workout relevantWorkout = getRelevantWorkout(workoutName);
     relevantWorkout.exercises.add(
       Exercise(
         name: workoutName,
@@ -40,13 +45,21 @@ class WorkOutData with ChangeNotifier {
   }
 
 //Check off the exercise once done
-  removeExercise(String workoutName, String exerciseName) {
-    //check if the workout is same
-    Workout relevantWorkout =
-        workoutList.firstWhere((workout) => workout.name == workoutName);
-    Exercise relevantExercise = relevantWorkout.exercises
-        .firstWhere((exercise) => exercise.name == exerciseName);
+  checkOffExercise(String workoutName, String exerciseName) {
+    Exercise relevantExercise = getRelevantExercise(workoutName, exerciseName);
     relevantExercise.isCompleted = !relevantExercise.isCompleted;
     notifyListeners();
+  }
+
+  //get the relevant workout
+  getRelevantWorkout(String workoutName) {
+    return workoutList.firstWhere((workout) => workout.name == workoutName);
+  }
+
+  //get the relevant exercise
+  getRelevantExercise(String workoutName, String exerciseName) {
+    Workout relevantWorkout = getRelevantWorkout(workoutName);
+    return relevantWorkout.exercises
+        .firstWhere((exercise) => exercise.name == exerciseName);
   }
 }
