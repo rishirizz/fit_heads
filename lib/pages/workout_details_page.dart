@@ -1,3 +1,4 @@
+import 'package:fit_heads/components/exercise_tile.dart';
 import 'package:fit_heads/state_management/workout_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,47 +31,23 @@ class _WorkoutDetailsPageState extends State<WorkoutDetailsPage> {
           body: ListView.builder(
             itemCount:
                 workOutData.getNumberOfExercisesInWorkout(widget.workoutName),
-            itemBuilder: (BuildContext context, int index) => ListTile(
-              title: Text(
-                workOutData
-                    .getRelevantWorkout(widget.workoutName)
-                    .exercises[index]
-                    .name,
-              ),
-              subtitle: Row(
-                children: [
-                  //Weight
-                  Chip(
-                    label: Text(
-                      workOutData
-                              .getRelevantWorkout(widget.workoutName)
-                              .exercises[index]
-                              .weight +
-                          'kg',
-                    ),
-                  ),
-                  //Reps
-                  Chip(
-                    label: Text(
-                      workOutData
-                              .getRelevantWorkout(widget.workoutName)
-                              .exercises[index]
-                              .sets +
-                          'reps',
-                    ),
-                  ),
-                  //Sets
-                  Chip(
-                    label: Text(
-                      workOutData
-                              .getRelevantWorkout(widget.workoutName)
-                              .exercises[index]
-                              .sets +
-                          'sets',
-                    ),
-                  ),
-                ],
-              ),
+            itemBuilder: (BuildContext context, int index) => ExerciseTile(
+              name: workOutData
+                  .getRelevantWorkout(widget.workoutName)
+                  .exercises[index]
+                  .name,
+              weight: workOutData
+                  .getRelevantWorkout(widget.workoutName)
+                  .exercises[index]
+                  .weight,
+              reps: workOutData
+                  .getRelevantWorkout(widget.workoutName)
+                  .exercises[index]
+                  .reps,
+              sets: workOutData
+                  .getRelevantWorkout(widget.workoutName)
+                  .exercises[index]
+                  .sets,
             ),
           ),
         ),
