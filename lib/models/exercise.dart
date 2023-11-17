@@ -3,13 +3,13 @@ class Exercise {
   final String weight;
   final String reps;
   final String sets;
-  final bool isCompleted;
+  bool isCompleted;
 
   Exercise({
     required this.name,
     required this.weight,
     required this.reps,
     required this.sets,
-    required this.isCompleted,
+    this.isCompleted=false,
   });
 }
